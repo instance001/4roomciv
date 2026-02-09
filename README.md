@@ -1,4 +1,4 @@
-# 4-Room Civilization — MVP (Helix + LM Studio)
+﻿# 4-Room Civilization — MVP (Helix + LM Studio)
 
 **Goal:** small trial (2–3 humans, 1–2 local LLMs) with Helix memory, a paired room (R3), and a minimal Commons (R4).
 
@@ -31,7 +31,7 @@
 
 **Effective Date:** 30 november 2025  
 **New License:** GNU Affero General Public License v3.0 (AGPL-3.0)  
-**Previous License:**  CC-BY-SA 4.0
+**Previous License:** pre-AGPL (see repository history)
 
 ---
 
