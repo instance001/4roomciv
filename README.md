@@ -2,6 +2,34 @@
 
 **Goal:** small trial (2–3 humans, 1–2 local LLMs) with Helix memory, a paired room (R3), and a minimal Commons (R4).
 
+## MVP Flow Map
+
+```mermaid
+flowchart TB
+    humans["2-3 humans"] --> api["FastAPI service<br/>uvicorn main:app"]
+    llms["1-2 local LLMs<br/>LM Studio OpenAI-compatible server"] --> api
+
+    api --> paired["R3 Paired Room<br/>/paired/session/generate"]
+    paired --> rag["RAG over Helix<br/>recent/search/topic memory"]
+    rag --> localModel["Local model call<br/>LM_API_BASE + LM_MODEL"]
+    localModel --> messages["Paired-room messages"]
+    messages --> extract["Auto-extract spines"]
+
+    extract --> autowrite{"SPINE_AUTOWRITE enabled?"}
+    autowrite -->|yes| helixWrite["/helix/spines<br/>validated Helix Spine v1 writes"]
+    autowrite -->|no| messages
+
+    helixWrite --> helix["Helix memory<br/>SQLite + FTS5 + topic table"]
+    manual["Manual spine write"] --> helixWrite
+    helix --> helixReads["/helix/recent<br/>/helix/search<br/>/helix/topic/{slug}"]
+    helixReads --> rag
+
+    api --> commons["R4 Commons<br/>threads + posts"]
+    commons --> threads["/commons/threads<br/>/commons/threads/{id}/post"]
+
+    api --> metrics["/metrics/dashboard<br/>trial visibility"]
+```
+
 ## Quickstart
 1) `pip install -r requirements.txt`
 2) In LM Studio: enable Local Server (OpenAI-compatible)
