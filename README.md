@@ -54,6 +54,8 @@ flowchart TB
 ## Notes
 - Set `SPINE_AUTOWRITE=0` to disable auto writes.
 - SQLite FTS5 backs search; topics exact-match via child table.
+- The app writes `symbound.db` beside `main.py` by default for unzip-and-run use.
+- Set `FOURROOMCIV_DATA_DIR` to place SQLite runtime data somewhere explicit; that folder is created on first run.
 
 # Relicensing Notice
 
